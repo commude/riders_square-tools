@@ -1,0 +1,71 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "riderssquare-develop-20190806175417-authRole",
+			"UnauthRoleArn": "arn:aws:iam::361742992052:role/riderssquare-develop-20190806175417-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::361742992052:role/riderssquare-develop-20190806175417-authRole",
+			"Region": "ap-northeast-1",
+			"DeploymentBucketName": "riderssquare-develop-20190806175417-deployment",
+			"UnauthRoleName": "riderssquare-develop-20190806175417-unauthRole",
+			"StackName": "riderssquare-develop-20190806175417",
+			"StackId": "arn:aws:cloudformation:ap-northeast-1:361742992052:stack/riderssquare-develop-20190806175417/28316ea0-b830-11e9-82b2-0e7851ff27a6"
+		}
+	},
+	"auth": {
+		"riderssquarec390475d": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/riderssquare-develop-20190806175417-deployment/amplify-cfn-templates/auth/riderssquarec390475d-cloudformation-template.yml",
+				"logicalId": "authriderssquarec390475d"
+			},
+			"lastPushTimeStamp": "2019-08-06T10:23:34.765Z",
+			"output": {
+				"AppClientSecret": "1m60qcv73kg85m659ah1v27e6qmgg3u7fkjj13i028ibdjpjf53a",
+				"UserPoolId": "ap-northeast-1_MdXJsq1J5",
+				"AppClientIDWeb": "6rkf3aapqlueoajajl6rk1jkn6",
+				"AppClientID": "57dfupjpfnob6opaobafu448ap",
+				"IdentityPoolId": "ap-northeast-1:efe05753-f8a6-4e2f-a1ab-fe4a0b17c64d",
+				"IdentityPoolName": "riderssquarec390475d_identitypool_c390475d__develop",
+				"UserPoolName": "riderssquarec390475d_userpool_c390475d"
+			},
+			"lastPushDirHash": "C7UMJr7e1SkLtVlZ3HIsrOg8+O0="
+		}
+	},
+	"api": {
+		"ridersSquare": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "AMAZON_COGNITO_USER_POOLS",
+				"GraphQLAPIIdOutput": "4as5qvozlvggjbttrtqcq2d3ei",
+				"GraphQLAPIEndpointOutput": "https://itpu3bisknarjd7pb3b37qn7dm.appsync-api.ap-northeast-1.amazonaws.com/graphql"
+			},
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/riderssquare-develop-20190806175417-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apiridersSquare"
+			},
+			"lastPushTimeStamp": "2019-08-06T10:23:34.766Z",
+			"lastPushDirHash": "pQBEXib88jyJzna1M1v9qkI0KXg="
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/riderssquare-develop-20190806175417-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2019-08-06T10:23:34.767Z",
+			"output": {
+				"S3BucketSecureURL": "https://riders-square-develop.s3.amazonaws.com",
+				"WebsiteURL": "http://riders-square-develop.s3-website-ap-northeast-1.amazonaws.com",
+				"Region": "ap-northeast-1",
+				"HostingBucketName": "riders-square-develop"
+			},
+			"lastPushDirHash": "nFuqnTyIdufI6s7LyMmGWpBsuys="
+		}
+	}
+}
