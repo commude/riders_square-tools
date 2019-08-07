@@ -1,0 +1,19 @@
+{
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "riderssquare-develop-20190806175417-authRole",
+            "UnauthRoleArn": "arn:aws:iam::361742992052:role/riderssquare-develop-20190806175417-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::361742992052:role/riderssquare-develop-20190806175417-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "riderssquare-develop-20190806175417-deployment",
+            "UnauthRoleName": "riderssquare-develop-20190806175417-unauthRole",
+            "StackName": "riderssquare-develop-20190806175417",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:361742992052:stack/riderssquare-develop-20190806175417/28316ea0-b830-11e9-82b2-0e7851ff27a6"
+        },
+        "categories": {
+            "auth": {
+                "riderssquarec390475d": {}
+            }
+        }
+    }
+}
