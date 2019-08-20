@@ -1,9 +1,9 @@
 {
-    "identityPoolName": "riderssquarec390475d_identitypool_c390475d",
+    "identityPoolName": "amplifyjsappb1536062_identitypool_b1536062",
     "allowUnauthenticatedIdentities": false,
-    "openIdLambdaRoleName": "ridersc390475d_openid_lambda_role",
-    "resourceNameTruncated": "ridersc390475d",
-    "userPoolName": "riderssquarec390475d_userpool_c390475d",
+    "openIdLambdaRoleName": "amplifb1536062_openid_lambda_role",
+    "resourceNameTruncated": "amplifb1536062",
+    "userPoolName": "amplifyjsappb1536062_userpool_b1536062",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -21,7 +21,7 @@
     "requiredAttributes": [
         "email"
     ],
-    "userpoolClientName": "ridersc390475d_app_client",
+    "userpoolClientName": "amplifb1536062_app_client",
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
@@ -30,10 +30,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "mfaLambdaRole": "ridersc390475d_totp_lambda_role",
-    "userpoolClientLambdaRole": "ridersc390475d_userpoolclient_lambda_role",
+    "mfaLambdaRole": "amplifb1536062_totp_lambda_role",
+    "userpoolClientLambdaRole": "amplifb1536062_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "riderssquarec390475d",
+    "resourceName": "amplifyjsappb1536062",
     "authSelections": "identityPoolAndUserPool",
     "authRoleName": {
         "Ref": "AuthRoleName"
@@ -54,6 +54,9 @@
         ]
     },
     "useDefault": "default",
+    "usernameAttributes": [
+        "email"
+    ],
     "additionalQuestions": [],
     "dependsOn": []
 }

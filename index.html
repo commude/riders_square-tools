@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Amplify Framework</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            html, body {
+                font-family: "Amazon Ember", "Helvetica", "sans-serif"; margin: 0;
+            }
+            a { color: #FF9900; }
+            h1 { font-weight: 300; }
+            .app { width: 100%; }
+            input {
+                margin: 2px;
+                width: 200px;
+                height: 24px;
+                font-size: 16px;
+            }
+            button {
+                margin: 2px;
+                height: 24px;
+                font-size: 16px;
+                background-color: #DDDDDD;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app">
+            <div>
+                <input type="text" name="username0" id="username0" placeholder="Username">
+                <input type="text" name="email0" id="email0" placeholder="email">
+                <input type="password" name="password0" id="password0" placeholder="Password">
+                <button id="signup">SignUp</button>
+            </div>
+            <div>
+                <input type="text" name="username" id="username" placeholder="Username">
+                <input type="password" name="password" id="password" placeholder="Password">
+                <button id="signin">SignIn</button>
+            </div>
+            <div>
+                <button id="session">CurrentSession</button>
+<!--                <button id="resend">Resend</button>-->
+                <button id="signout">SignOut</button>
+            </div>
+            <div id="result"></div>
+        </div>
+        <script src="main.bundle.js"></script>
+    </body>
+</html>
