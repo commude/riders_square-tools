@@ -4,13 +4,13 @@ const awsmobile = {
     "aws_project_region": "ap-northeast-1",
     "aws_content_delivery_bucket": "rider-square-dev",
     "aws_content_delivery_bucket_region": "ap-northeast-1",
-    "aws_content_delivery_url": "http://rider-square-dev.s3-website-ap-northeast-1.amazonaws.com",
-    "aws_cognito_identity_pool_id": "ap-northeast-1:4a5638b9-e586-4536-b5dc-2968452dfe0c",
+    "aws_content_delivery_url": "https://rs-dev-tools.commude.biz/",
+    "aws_cognito_identity_pool_id": null,
     "aws_cognito_region": "ap-northeast-1",
-    "aws_user_pools_id": "ap-northeast-1_Vc3z9mvPd",
-    "aws_user_pools_web_client_id": "6rvdlt008pri98llq3imo4qvij",
+    "aws_user_pools_id": "ap-northeast-1_MH9VZ4UdY",
+    "aws_user_pools_web_client_id": "1aa035sb5p1s10kspvsrdq471l",
     "oauth": {
-        "domain": "riders-square-auth-dev.auth.ap-northeast-1.amazoncognito.com",
+        "domain": "riders-square-dev.auth.ap-northeast-1.amazoncognito.com",
         "scope": [
             "phone",
             "email",
@@ -18,8 +18,8 @@ const awsmobile = {
             "profile",
             "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "https://local.riders-square.jp/",
-        "redirectSignOut": "https://local.riders-square.jp/",
+        "redirectSignIn": "https://rs-dev-tools.commude.biz/",
+        "redirectSignOut": "https://rs-dev-tools.commude.biz/",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS"
