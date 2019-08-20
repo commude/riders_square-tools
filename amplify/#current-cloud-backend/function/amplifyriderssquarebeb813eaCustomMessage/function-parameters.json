@@ -1,0 +1,14 @@
+{
+    "trigger": true,
+    "modules": [
+        "verification-link"
+    ],
+    "parentResource": "amplifyriderssquarebeb813ea",
+    "functionName": "amplifyriderssquarebeb813eaCustomMessage",
+    "parentStack": "auth",
+    "triggerEnvs": "[{\"key\":\"RESOURCENAME\",\"value\":\"resourceName\"}]",
+    "triggerTemplate": "CustomMessage.json.ejs",
+    "roleName": "amplifyriderssquarebeb813eaCustomMessage",
+    "skipEdit": true,
+    "resourceName": "amplifyriderssquarebeb813eaCustomMessage"
+}

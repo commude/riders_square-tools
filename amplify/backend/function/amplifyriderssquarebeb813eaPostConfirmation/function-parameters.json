@@ -1,0 +1,14 @@
+{
+    "trigger": true,
+    "modules": [
+        "add-to-group"
+    ],
+    "parentResource": "amplifyriderssquarebeb813ea",
+    "functionName": "amplifyriderssquarebeb813eaPostConfirmation",
+    "parentStack": "auth",
+    "triggerEnvs": "[]",
+    "triggerTemplate": "PostConfirmation.json.ejs",
+    "roleName": "amplifyriderssquarebeb813eaPostConfirmation",
+    "skipEdit": true,
+    "resourceName": "amplifyriderssquarebeb813eaPostConfirmation"
+}

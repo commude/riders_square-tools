@@ -1,24 +1,46 @@
 {
-	"auth": {
-		"riderssquarec390475d": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	},
-	"api": {
-		"ridersSquare": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"securityType": "AMAZON_COGNITO_USER_POOLS"
-			}
-		}
-	},
 	"hosting": {
 		"S3AndCloudFront": {
 			"service": "S3AndCloudFront",
 			"providerPlugin": "awscloudformation"
+		}
+	},
+	"function": {
+		"amplifyriderssquarebeb813eaCustomMessage": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		},
+		"amplifyriderssquarebeb813eaPostConfirmation": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
+	},
+	"auth": {
+		"amplifyriderssquarebeb813ea": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "amplifyriderssquarebeb813eaCustomMessage",
+					"triggerProvider": "Cognito",
+					"attributes": [
+						"Arn",
+						"Name"
+					]
+				},
+				{
+					"category": "function",
+					"resourceName": "amplifyriderssquarebeb813eaPostConfirmation",
+					"triggerProvider": "Cognito",
+					"attributes": [
+						"Arn",
+						"Name"
+					]
+				}
+			]
 		}
 	}
 }

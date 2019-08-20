@@ -37,16 +37,11 @@
 					"Statement": [
 						{
 							"Sid": "",
-							"Effect": "Allow",
+							"Effect": "Deny",
 							"Principal": {
 								"Federated": "cognito-identity.amazonaws.com"
 							},
-							"Action": "sts:AssumeRoleWithWebIdentity",
-							"Condition": {
-								"ForAnyValue:StringLike": {
-									"cognito-identity.amazonaws.com:amr": "authenticated"
-								}
-							}
+							"Action": "sts:AssumeRoleWithWebIdentity"
 						}
 					]
 				}
@@ -63,31 +58,61 @@
 					"Statement": [
 						{
 							"Sid": "",
-							"Effect": "Allow",
+							"Effect": "Deny",
 							"Principal": {
 								"Federated": "cognito-identity.amazonaws.com"
 							},
-							"Action": "sts:AssumeRoleWithWebIdentity",
-							"Condition": {
-								"ForAnyValue:StringLike": {
-									"cognito-identity.amazonaws.com:amr": "unauthenticated"
-								}
-							}
+							"Action": "sts:AssumeRoleWithWebIdentity"
 						}
 					]
 				}
 			}
 		},
-		"authriderssquarec390475d": {
+		"hostingS3AndCloudFront": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/riderssquare-develop-20190806175417-deployment/amplify-cfn-templates/auth/riderssquarec390475d-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-riderssquare-dev-20190820134919-deployment/amplify-cfn-templates/hosting/template.json",
 				"Parameters": {
-					"identityPoolName": "riderssquarec390475d_identitypool_c390475d",
+					"bucketName": "rider-square",
+					"env": "dev"
+				}
+			}
+		},
+		"functionamplifyriderssquarebeb813eaCustomMessage": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-riderssquare-dev-20190820134919-deployment/amplify-cfn-templates/function/amplifyriderssquarebeb813eaCustomMessage-cloudformation-template.json",
+				"Parameters": {
+					"modules": "verification-link",
+					"resourceName": "amplifyriderssquarebeb813eaCustomMessage",
+					"REDIRECTURL": "https://local.riders-square.jp",
+					"EMAILSUBJECT": "Verification on Riders Square",
+					"EMAILMESSAGE": "Thank you for choosing Riders Square! Kindly click the link provided on this email to proceed in verification of your account.",
+					"env": "dev"
+				}
+			}
+		},
+		"functionamplifyriderssquarebeb813eaPostConfirmation": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-riderssquare-dev-20190820134919-deployment/amplify-cfn-templates/function/amplifyriderssquarebeb813eaPostConfirmation-cloudformation-template.json",
+				"Parameters": {
+					"modules": "add-to-group",
+					"resourceName": "amplifyriderssquarebeb813eaPostConfirmation",
+					"GROUP": "RidersSquareAuthGroup",
+					"env": "dev"
+				}
+			}
+		},
+		"authamplifyriderssquarebeb813ea": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-riderssquare-dev-20190820134919-deployment/amplify-cfn-templates/auth/amplifyriderssquarebeb813ea-cloudformation-template.yml",
+				"Parameters": {
+					"identityPoolName": "amplifyriderssquarebeb813ea_identitypool_beb813ea",
 					"allowUnauthenticatedIdentities": false,
-					"openIdLambdaRoleName": "ridersc390475d_openid_lambda_role",
-					"resourceNameTruncated": "ridersc390475d",
-					"userPoolName": "riderssquarec390475d_userpool_c390475d",
+					"resourceNameTruncated": "amplifbeb813ea",
+					"userPoolName": "amplifyriderssquarebeb813ea_userpool_beb813ea",
 					"autoVerifiedAttributes": "email",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
@@ -99,22 +124,14 @@
 					"passwordPolicyMinLength": 8,
 					"passwordPolicyCharacters": "",
 					"requiredAttributes": "email",
-					"userpoolClientName": "ridersc390475d_app_client",
 					"userpoolClientGenerateSecret": true,
 					"userpoolClientRefreshTokenValidity": 30,
 					"userpoolClientWriteAttributes": "email",
 					"userpoolClientReadAttributes": "email",
-					"mfaLambdaRole": "ridersc390475d_totp_lambda_role",
-					"userpoolClientLambdaRole": "ridersc390475d_userpoolclient_lambda_role",
+					"userpoolClientLambdaRole": "amplifbeb813ea_userpoolclient_lambda_role",
 					"userpoolClientSetAttributes": false,
-					"resourceName": "riderssquarec390475d",
+					"resourceName": "amplifyriderssquarebeb813ea",
 					"authSelections": "identityPoolAndUserPool",
-					"authRoleName": {
-						"Ref": "AuthRoleName"
-					},
-					"unauthRoleName": {
-						"Ref": "UnauthRoleName"
-					},
 					"authRoleArn": {
 						"Fn::GetAtt": [
 							"AuthRole",
@@ -127,41 +144,217 @@
 							"Arn"
 						]
 					},
-					"useDefault": "default",
-					"additionalQuestions": "",
-					"dependsOn": "",
-					"env": "develop"
-				}
-			}
-		},
-		"apiridersSquare": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/riderssquare-develop-20190806175417-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-				"Parameters": {
-					"AppSyncApiName": "ridersSquare",
-					"DynamoDBBillingMode": "PAY_PER_REQUEST",
-					"DynamoDBEnableServerSideEncryption": "false",
-					"AuthCognitoUserPoolId": {
+					"useDefault": "defaultSocial",
+					"hostedUI": true,
+					"triggers": "{\"CustomMessage\":[\"verification-link\"],\"PostConfirmation\":[\"add-to-group\"]}",
+					"hostedUIDomainName": "riders-square-auth",
+					"authProvidersUserPool": "Facebook",
+					"hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}}]",
+					"oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://local.riders-square.jp/\"],\"LogoutURLs\":[\"https://local.riders-square.jp/\"]}",
+					"verificationBucketName": "amplifyriderssquarebeb813eaverificationbucket",
+					"parentStack": {
+						"Ref": "AWS::StackId"
+					},
+					"permissions": "{\"policyName\":\"AddToGroupCognito\",\"trigger\":\"PostConfirmation\",\"effect\":\"Allow\",\"actions\":[\"cognito-idp:AdminAddUserToGroup\",\"cognito-idp:GetGroup\",\"cognito-idp:CreateGroup\"],\"resource\":{\"paramType\":\"!GetAtt\",\"keys\":[\"UserPool\",\"Arn\"]}}",
+					"dependsOn": "[object Object],[object Object]",
+					"hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"1327267457438620\",\"client_secret\":\"80e9eb580edef4926a80cd6f7e9740d2\"}]",
+					"functionamplifyriderssquarebeb813eaCustomMessageArn": {
 						"Fn::GetAtt": [
-							"authriderssquarec390475d",
-							"Outputs.UserPoolId"
+							"functionamplifyriderssquarebeb813eaCustomMessage",
+							"Outputs.Arn"
 						]
 					},
-					"S3DeploymentBucket": "riderssquare-develop-20190806175417-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/95b8fc4cf230334c4fd20df073b15311bdc3276e",
-					"env": "develop"
+					"functionamplifyriderssquarebeb813eaCustomMessageName": {
+						"Fn::GetAtt": [
+							"functionamplifyriderssquarebeb813eaCustomMessage",
+							"Outputs.Name"
+						]
+					},
+					"functionamplifyriderssquarebeb813eaPostConfirmationArn": {
+						"Fn::GetAtt": [
+							"functionamplifyriderssquarebeb813eaPostConfirmation",
+							"Outputs.Arn"
+						]
+					},
+					"functionamplifyriderssquarebeb813eaPostConfirmationName": {
+						"Fn::GetAtt": [
+							"functionamplifyriderssquarebeb813eaPostConfirmation",
+							"Outputs.Name"
+						]
+					},
+					"env": "dev"
 				}
 			}
 		},
-		"hostingS3AndCloudFront": {
-			"Type": "AWS::CloudFormation::Stack",
+		"UpdateRolesWithIDPFunction": {
+			"DependsOn": [
+				"AuthRole",
+				"UnauthRole",
+				"authamplifyriderssquarebeb813ea"
+			],
+			"Type": "AWS::Lambda::Function",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/riderssquare-develop-20190806175417-deployment/amplify-cfn-templates/hosting/template.json",
-				"Parameters": {
-					"bucketName": "riders-square",
-					"env": "develop"
+				"Code": {
+					"ZipFile": {
+						"Fn::Join": [
+							"\n",
+							[
+								"const response = require('cfn-response');",
+								"const aws = require('aws-sdk');",
+								"let responseData = {};",
+								"exports.handler = function(event, context) {",
+								"  try {",
+								"    let authRoleName = event.ResourceProperties.authRoleName;",
+								"    let unauthRoleName = event.ResourceProperties.unauthRoleName;",
+								"    let idpId = event.ResourceProperties.idpId;",
+								"    let promises = [];",
+								"    let authParamsJson = { 'Version': '2012-10-17','Statement': [{'Effect': 'Allow','Principal': {'Federated': 'cognito-identity.amazonaws.com'},'Action': 'sts:AssumeRoleWithWebIdentity','Condition': {'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'authenticated'}}}]};",
+								"    let unauthParamsJson = { 'Version': '2012-10-17','Statement': [{'Effect': 'Allow','Principal': {'Federated': 'cognito-identity.amazonaws.com'},'Action': 'sts:AssumeRoleWithWebIdentity','Condition': {'StringEquals': {'cognito-identity.amazonaws.com:aud': idpId},'ForAnyValue:StringLike': {'cognito-identity.amazonaws.com:amr': 'unauthenticated'}}}]};",
+								"    if (event.RequestType == 'Delete') {",
+								"        delete authParamsJson.Statement.Condition;",
+								"        delete unauthParamsJson.Statement.Condition;",
+								"        let authParams = { PolicyDocument: JSON.stringify(authParamsJson),RoleName: authRoleName};",
+								"        let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson),RoleName: unauthRoleName};",
+								"        const iam = new aws.IAM({ apiVersion: '2010-05-08', region: event.ResourceProperties.region});",
+								"        promises.push(iam.updateAssumeRolePolicy(authParams).promise());",
+								"        promises.push(iam.updateAssumeRolePolicy(unauthParams).promise());",
+								"        Promise.all(promises)",
+								"         .then((res) => {",
+								"            console.log(\"delete\" + res);",
+								"            console.log(\"response data\" + JSON.stringify(res));",
+								"            response.send(event, context, response.SUCCESS, res);",
+								"         });",
+								"    }",
+								"    if (event.RequestType == 'Update' || event.RequestType == 'Create') {",
+								"       const iam = new aws.IAM({ apiVersion: '2010-05-08', region: event.ResourceProperties.region});",
+								"        let authParams = { PolicyDocument: JSON.stringify(authParamsJson),RoleName: authRoleName};",
+								"        let unauthParams = {PolicyDocument: JSON.stringify(unauthParamsJson),RoleName: unauthRoleName};",
+								"        promises.push(iam.updateAssumeRolePolicy(authParams).promise());",
+								"        promises.push(iam.updateAssumeRolePolicy(unauthParams).promise());",
+								"        Promise.all(promises)",
+								"         .then((res) => {",
+								"            console.log(\"createORupdate\" + res);",
+								"            console.log(\"response data\" + JSON.stringify(res));",
+								"            response.send(event, context, response.SUCCESS, {});",
+								"         });",
+								"    }",
+								"  } catch(err) {",
+								"       console.log(err.stack);",
+								"       responseData = {Error: err};",
+								"       response.send(event, context, response.FAILED, responseData);",
+								"       throw err;",
+								"  }",
+								"};"
+							]
+						]
+					}
+				},
+				"Handler": "index.handler",
+				"Runtime": "nodejs8.10",
+				"Timeout": "300",
+				"Role": {
+					"Fn::GetAtt": [
+						"UpdateRolesWithIDPFunctionRole",
+						"Arn"
+					]
 				}
+			}
+		},
+		"UpdateRolesWithIDPFunctionOutputs": {
+			"Type": "Custom::LambdaCallout",
+			"Properties": {
+				"ServiceToken": {
+					"Fn::GetAtt": [
+						"UpdateRolesWithIDPFunction",
+						"Arn"
+					]
+				},
+				"region": {
+					"Ref": "AWS::Region"
+				},
+				"idpId": {
+					"Fn::GetAtt": [
+						"authamplifyriderssquarebeb813ea",
+						"Outputs.IdentityPoolId"
+					]
+				},
+				"authRoleName": {
+					"Ref": "AuthRoleName"
+				},
+				"unauthRoleName": {
+					"Ref": "UnauthRoleName"
+				}
+			}
+		},
+		"UpdateRolesWithIDPFunctionRole": {
+			"Type": "AWS::IAM::Role",
+			"Properties": {
+				"RoleName": {
+					"Fn::Join": [
+						"",
+						[
+							{
+								"Ref": "AuthRoleName"
+							},
+							"-idp"
+						]
+					]
+				},
+				"AssumeRolePolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+						{
+							"Effect": "Allow",
+							"Principal": {
+								"Service": [
+									"lambda.amazonaws.com"
+								]
+							},
+							"Action": [
+								"sts:AssumeRole"
+							]
+						}
+					]
+				},
+				"Policies": [
+					{
+						"PolicyName": "UpdateRolesWithIDPFunctionPolicy",
+						"PolicyDocument": {
+							"Version": "2012-10-17",
+							"Statement": [
+								{
+									"Effect": "Allow",
+									"Action": [
+										"logs:CreateLogGroup",
+										"logs:CreateLogStream",
+										"logs:PutLogEvents"
+									],
+									"Resource": "arn:aws:logs:*:*:*"
+								},
+								{
+									"Effect": "Allow",
+									"Action": "iam:UpdateAssumeRolePolicy",
+									"Resource": {
+										"Fn::GetAtt": [
+											"AuthRole",
+											"Arn"
+										]
+									}
+								},
+								{
+									"Effect": "Allow",
+									"Action": "iam:UpdateAssumeRolePolicy",
+									"Resource": {
+										"Fn::GetAtt": [
+											"UnauthRole",
+											"Arn"
+										]
+									}
+								}
+							]
+						}
+					}
+				]
 			}
 		}
 	},

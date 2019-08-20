@@ -2,22 +2,27 @@
 
 const awsmobile = {
     "aws_project_region": "ap-northeast-1",
-    "aws_cognito_identity_pool_id": "ap-northeast-1:efe05753-f8a6-4e2f-a1ab-fe4a0b17c64d",
-    "aws_cognito_region": "ap-northeast-1",
-    "aws_user_pools_id": "ap-northeast-1_MdXJsq1J5",
-    "aws_user_pools_web_client_id": "6rkf3aapqlueoajajl6rk1jkn6",
-    "oauth": {},
-    "aws_appsync_graphqlEndpoint": "https://itpu3bisknarjd7pb3b37qn7dm.appsync-api.ap-northeast-1.amazonaws.com/graphql",
-    "aws_appsync_region": "ap-northeast-1",
-    "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_content_delivery_bucket": "riders-square-develop",
+    "aws_content_delivery_bucket": "rider-square-dev",
     "aws_content_delivery_bucket_region": "ap-northeast-1",
-    "aws_content_delivery_url": "http://riders-square-develop.s3-website-ap-northeast-1.amazonaws.com",
-    "Auth": {
-        "region": "ap-northeast-1",
-        "userPoolId": "ap-northeast-1_3lRCkgpVL",
-        "userPoolWebClientId": "2b3q9qa4acbhj1ipn63i1fldpa"
-    }
+    "aws_content_delivery_url": "http://rider-square-dev.s3-website-ap-northeast-1.amazonaws.com",
+    "aws_cognito_identity_pool_id": "ap-northeast-1:4a5638b9-e586-4536-b5dc-2968452dfe0c",
+    "aws_cognito_region": "ap-northeast-1",
+    "aws_user_pools_id": "ap-northeast-1_Vc3z9mvPd",
+    "aws_user_pools_web_client_id": "6rvdlt008pri98llq3imo4qvij",
+    "oauth": {
+        "domain": "riders-square-auth-dev.auth.ap-northeast-1.amazoncognito.com",
+        "scope": [
+            "phone",
+            "email",
+            "openid",
+            "profile",
+            "aws.cognito.signin.user.admin"
+        ],
+        "redirectSignIn": "https://local.riders-square.jp/",
+        "redirectSignOut": "https://local.riders-square.jp/",
+        "responseType": "code"
+    },
+    "federationTarget": "COGNITO_USER_POOLS"
 };
 
 
