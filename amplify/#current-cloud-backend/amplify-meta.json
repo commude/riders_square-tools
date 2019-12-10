@@ -1,0 +1,115 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "amplify-riderssquare-dev-20190820134919-authRole",
+			"UnauthRoleArn": "arn:aws:iam::361742992052:role/amplify-riderssquare-dev-20190820134919-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::361742992052:role/amplify-riderssquare-dev-20190820134919-authRole",
+			"Region": "ap-northeast-1",
+			"DeploymentBucketName": "amplify-riderssquare-dev-20190820134919-deployment",
+			"UnauthRoleName": "amplify-riderssquare-dev-20190820134919-unauthRole",
+			"StackName": "amplify-riderssquare-dev-20190820134919",
+			"StackId": "arn:aws:cloudformation:ap-northeast-1:361742992052:stack/amplify-riderssquare-dev-20190820134919/410c14a0-c30e-11e9-98ca-0e41556fdef4"
+		}
+	},
+	"hosting": {
+		"S3AndCloudFront": {
+			"service": "S3AndCloudFront",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-riderssquare-dev-20190820134919-deployment/amplify-cfn-templates/hosting/template.json",
+				"logicalId": "hostingS3AndCloudFront"
+			},
+			"lastPushTimeStamp": "2019-08-20T06:13:18.622Z",
+			"output": {
+				"S3BucketSecureURL": "https://rider-square-dev.s3.amazonaws.com",
+				"WebsiteURL": "http://rider-square-dev.s3-website-ap-northeast-1.amazonaws.com",
+				"Region": "ap-northeast-1",
+				"HostingBucketName": "rider-square-dev"
+			},
+			"lastPushDirHash": "QwF6KMSUPqz/Z5qpKGvGRMtDKL8="
+		}
+	},
+	"function": {
+		"amplifyriderssquarebeb813eaCustomMessage": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"lastBuildTimeStamp": "2019-08-20T06:08:34.106Z",
+			"lastPackageTimeStamp": "2019-08-20T06:08:36.237Z",
+			"distZipFilename": "amplifyriderssquarebeb813eaCustomMessage-53765446632f50554d63-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-riderssquare-dev-20190820134919-deployment/amplify-cfn-templates/function/amplifyriderssquarebeb813eaCustomMessage-cloudformation-template.json",
+				"logicalId": "functionamplifyriderssquarebeb813eaCustomMessage"
+			},
+			"lastPushTimeStamp": "2019-08-20T06:13:18.626Z",
+			"output": {
+				"Region": "ap-northeast-1",
+				"Arn": "arn:aws:lambda:ap-northeast-1:361742992052:function:amplifyriderssquarebeb813eaCustomMessage-dev",
+				"Name": "amplifyriderssquarebeb813eaCustomMessage-dev"
+			},
+			"lastPushDirHash": "Aa1Lz6thUCye9nSWQFn/6tlQM2g="
+		},
+		"amplifyriderssquarebeb813eaPostConfirmation": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"lastBuildTimeStamp": "2019-08-20T06:08:36.141Z",
+			"lastPackageTimeStamp": "2019-08-20T06:08:36.912Z",
+			"distZipFilename": "amplifyriderssquarebeb813eaPostConfirmation-63302b695a6b48596642-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-riderssquare-dev-20190820134919-deployment/amplify-cfn-templates/function/amplifyriderssquarebeb813eaPostConfirmation-cloudformation-template.json",
+				"logicalId": "functionamplifyriderssquarebeb813eaPostConfirmation"
+			},
+			"lastPushTimeStamp": "2019-08-20T06:13:18.626Z",
+			"output": {
+				"Region": "ap-northeast-1",
+				"Arn": "arn:aws:lambda:ap-northeast-1:361742992052:function:amplifyriderssquarebeb813eaPostConfirmation-dev",
+				"Name": "amplifyriderssquarebeb813eaPostConfirmation-dev"
+			},
+			"lastPushDirHash": "c2Mr9nqMyPPJwCSx/H6P70QUgWM="
+		}
+	},
+	"auth": {
+		"amplifyriderssquarebeb813ea": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "amplifyriderssquarebeb813eaCustomMessage",
+					"triggerProvider": "Cognito",
+					"attributes": [
+						"Arn",
+						"Name"
+					]
+				},
+				{
+					"category": "function",
+					"resourceName": "amplifyriderssquarebeb813eaPostConfirmation",
+					"triggerProvider": "Cognito",
+					"attributes": [
+						"Arn",
+						"Name"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-riderssquare-dev-20190820134919-deployment/amplify-cfn-templates/auth/amplifyriderssquarebeb813ea-cloudformation-template.yml",
+				"logicalId": "authamplifyriderssquarebeb813ea"
+			},
+			"lastPushTimeStamp": "2019-08-20T06:13:18.626Z",
+			"output": {
+				"AppClientSecret": "1ekinard5lmce627pui8h57o6cvhqag91d0mq9q9fngsjush9jte",
+				"UserPoolId": "ap-northeast-1_Vc3z9mvPd",
+				"AppClientIDWeb": "6rvdlt008pri98llq3imo4qvij",
+				"AppClientID": "4mmuhaidppmtptdbrg49875ego",
+				"HostedUIDomain": "riders-square-auth-dev",
+				"IdentityPoolId": "ap-northeast-1:4a5638b9-e586-4536-b5dc-2968452dfe0c",
+				"IdentityPoolName": "amplifyriderssquarebeb813ea_identitypool_beb813ea__dev",
+				"OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://local.riders-square.jp/\"],\"LogoutURLs\":[\"https://local.riders-square.jp/\"]}",
+				"UserPoolName": "amplifyriderssquarebeb813ea_userpool_beb813ea"
+			},
+			"lastPushDirHash": "77VHh827ytHNxCwae1zi0ZBULyA="
+		}
+	}
+}
